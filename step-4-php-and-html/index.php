@@ -24,8 +24,8 @@
 
     <!-- 
     In order to embed PHP into HTML, we need to use
-    php open tag (all together) < ? php and closing 
-    php tag ?>. 
+    php open tag (all together) "< ? php" and closing 
+    php tag "?>". 
 
 
     https://www.php.net/manual/en/language.variables.superglobals.php
