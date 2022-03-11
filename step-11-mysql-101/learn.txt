@@ -1,0 +1,215 @@
+**********************************
+    How to install it on a Mac?
+**********************************
+
+Alternative 1:
+    - Use "hombrew" CLI in order to search for MySQL.
+
+Alternative 2:
+    - Install MAMP, XAMP, WAMP on your OS and it will 
+      install MySQL within the stack. 
+
+
+How to access MySQL?
+
+****************************
+    Using 'mysql' CLI
+****************************
+
+- To access to the database, execute the command 'mysql'. Once inside the
+  console of mysql, every command that we execute should end up with a 
+  semicolon ';'.
+
+------------------------------------------------------------------------------------
+> mysql 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 8.0.28 Homebrew
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+------------------------------------------------------------------------------------
+
+- If you set up a user and password, you use the following syntax and 
+  it will ask you for a password:
+
+------------------------------------------------------------------------------------
+> mysql -u <user> -p
+> Enter password: 
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 8.0.28 Homebrew
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+
+------------------------------------------------------------------------------------
+
+********************************
+    Showing created databases
+********************************
+
+- If you want to know what databases are created on 
+  your database server, execute the following command:
+
+------------------------------------------------------------------------------------
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.01 sec)
+------------------------------------------------------------------------------------
+
+********************************
+    Creating a new database
+********************************
+
+- In order to create a new database, the following syntax is used to create one:
+  "create database <name_of_the_database>;"
+
+------------------------------------------------------------------------------------
+mysql> create database mytodo;
+Query OK, 1 row affected (0.00 sec)
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| mytodo             |
++--------------------+
+5 rows in set (0.01 sec)
+------------------------------------------------------------------------------------
+
+********************************
+    Use created database
+********************************
+- In order to use the created database, we execute the following command:
+  "use <database_name>;"
+
+------------------------------------------------------------------------------------
+mysql> use mytodo;
+Database changed
+------------------------------------------------------------------------------------
+
+***********************************
+    Showing and creating tables
+***********************************
+- In order to show created tables that the selected database has, we 
+  execute the following command:
+  "show tables;"
+
+------------------------------------------------------------------------------------
+mysql> use mytodo;
+Database changed
+mysql> show tables;
+Empty set (0.01 sec);
+------------------------------------------------------------------------------------
+
+- In order to create tables to an existing database execute the following command:
+  "create table <table_name> ( <column1_name> <data_type>, <column2_name> <data_type>);"
+
+------------------------------------------------------------------------------------
+
+mysql> use mytodo;
+Database changed
+mysql> show tables;
+Empty set (0.01 sec);
+mysql> create table todos (description text, completed boolean);
+Query OK, 1 row affected (0.00 sec)
+mysql> show tables;
++------------------+
+| Tables_in_mytodo |
++------------------+
+| todos            |
++------------------+
+1 row in set (0.00 sec)
+
+------------------------------------------------------------------------------------
+
+- What if we want to insert some data to the table?
+  Well, we use the following command: 
+
+  "insert into <table_name> (column1, column2) values (<value1>, <value2>);"
+
+------------------------------------------------------------------------------------
+
+mysql> insert into todos (description, completed) values ('Go to the store', false);
+Query OK, 1 row affected (0.01 sec)
+
+------------------------------------------------------------------------------------
+
+- What if we want to select data from a created table?
+  Well, we use the following command: 
+  
+  Alternative 1 (fetching all columns):
+  "select * from <table_name>;"
+
+  Alternative 2 (fetching specific columns):
+  "select <column_1>, <column_2> from <table_name>;"
+
+------------------------------------------------------------------------------------
+
+mysql> select * from todos;
++-----------------+-----------+
+| description     | completed |
++-----------------+-----------+
+| Go to the store |         0 |
++-----------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select description from todos;
++-----------------+
+| description     |
++-----------------+
+| Go to the store |
++-----------------+
+1 row in set (0.00 sec)
+
+------------------------------------------------------------------------------------
+
+- What if we want to display the columns of a created table?
+  Well, we use the following command: 
+  "describe <table_name>;"
+
+------------------------------------------------------------------------------------
+mysql> describe todos;
++-------------+------------+------+-----+---------+-------+
+| Field       | Type       | Null | Key | Default | Extra |
++-------------+------------+------+-----+---------+-------+
+| description | text       | YES  |     | NULL    |       |
+| completed   | tinyint(1) | YES  |     | NULL    |       |
++-------------+------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+------------------------------------------------------------------------------------
+
+- What if we want to drop a table? Well, we use the following command: 
+  "drop table <table_name>;"
+
+------------------------------------------------------------------------------------
+mysql> drop table todos;
+Query OK, 0 rows affected (0.01 sec)
+------------------------------------------------------------------------------------
+
